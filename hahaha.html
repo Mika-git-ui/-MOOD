@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>തേങ്ങേടെ MOOD — ThengaMood (Useless Hacks)</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+	.mydiv{
+		margin-top: 20px;
+	}
+        :root{
+            --accent:#ff6b6b;
+            --muted:#f3f4f6;
+            --glass: rgba(255,255,255,0.75);
+            --maxWidth:1100px;
+            --radius:16px;
+            --font-sans: 'Luckiest Guy', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+        }
+        *{box-sizing:border-box}
+        html,body{height:100%;margin:0;font-family:var(--font-sans);color:#0b1320}
+        body{background:linear-gradient(180deg,#c8fff3 0%, #eafcf9 35%, #fff 100%);overflow-x:hidden}
+
+        .viewport{position:fixed;inset:0;pointer-events:none;z-index:-2;overflow:hidden}
+        .layer{position:absolute;left:50%;transform:translateX(-50%);}
+        .layer.bg{width:160%;height:140%;top:-8%;background-image:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.25), transparent 10%), linear-gradient(180deg,#8ee5d6 0%, #7ad9c9 60%), repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 10px);filter:blur(10px) saturate(110%);opacity:0.95;z-index:-2}
+        .layer.clouds{width:100vw;height:50%;top:0;background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400"><g fill=\"%23ffffff\" opacity=\"0.75\"><ellipse cx=\"200\" cy=\"120\" rx=\"120\" ry=\"40\"/><ellipse cx=\"320\" cy=\"100\" rx=\"90\" ry=\"35\"/><ellipse cx=\"420\" cy=\"140\" rx=\"140\" ry=\"50\"/></g></svg>');}
+        
+        /* Updated green color palette for trees */
+        .layer.midtrees{width:100vw;height:60%;top:20%;background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="600"><g fill=\"%230A5C36\"><rect x=\"0\" y=\"360\" width=\"1600\" height=\"240\" rx=\"0\"/></g></svg>');}
+        .layer.frtrees{width:100vw;height:80%;top:40%;background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="800"><g fill=\"%230F5132\"><rect x=\"0\" y=\"500\" width=\"1600\" height=\"300\"/></g></svg>');filter:drop-shadow(0 30px 20px rgba(0,0,0,0.15));}
+        
+        /* Waving coconut tree using jQuery and CSS */
+        .coconut-tree {
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            width: 150px;
+            height: 400px;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg"><path d="M50 200 C30 180, 20 150, 40 100 S70 40, 55 0 C60 20, 80 30, 85 45 C90 55, 95 65, 80 80 C60 95, 40 110, 30 130 C20 150, 25 170, 38 185 z" fill="%2320461b" /></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            transform-origin: bottom center;
+            z-index: 10; /* Ensure it is visible above other layers */
+        }
+        
+        /* Falling coconuts layer */
+        .layer.coconuts{
+            width:100vw;height:100vh;top:0;pointer-events:none;z-index:-1;
+        }
+        /* Coconut tree silhouettes at bottom (updated color) */
+        .layer.treeline{
+            width:100vw;height:260px;bottom:0;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1000 260" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="200" width="1000" height="60" fill="%2314452F"/><rect x="120" y="100" width="24" height="140" rx="12" fill="%2314452F"/><ellipse cx="132" cy="102" rx="48" ry="34" fill="%2318392B"/><rect x="400" y="150" width="32" height="80" rx="12" fill="%2314452F"/><ellipse cx="416" cy="152" rx="40" ry="26" fill="%2318392B"/><rect x="820" y="120" width="24" height="120" rx="12" fill="%2314452F"/><ellipse cx="832" cy="122" rx="48" ry="34" fill="%2318392B"/></svg>');
+            z-index:2;
+        }
+        /* Decorative coconut cluster (SVG) */
+        .coconut-svg{position:fixed;right:-6vw;top:8vh;width:28vw;max-width:280px;opacity:0.95;transform-origin:center;pointer-events:none;z-index:0}
+
+        /* Page content */
+        .container{max-width:var(--maxWidth);margin:0 auto;padding:48px 20px;position:relative;z-index:10}
+        header{display:flex;align-items:center;gap:18px;margin-top:28px}
+        .logo{display:flex;align-items:center;gap:12px}
+        .logo .mark{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#ffe6a7,#ffd0d0);display:grid;place-items:center;font-weight:700}
+        h1{font-size:clamp(28px,4vw,44px);line-height:1.02;margin:0}
+        .subtitle{color:#274046;margin-top:8px}
+        .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start;padding:36px 0}
+        .card{background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.7));backdrop-filter:blur(6px);border-radius:var(--radius);padding:20px;box-shadow:0 8px 30px rgba(17,24,39,0.06)}
+        .uploader{display:flex;flex-direction:column;gap:12px}
+        .file{display:flex;gap:8px;align-items:center}
+        input[type=file]{padding:8px}
+        .controls{display:flex;gap:8px;align-items:center}
+        button{background:var(--accent);border:none;color:white;padding:10px 14px;border-radius:12px;font-weight:600;cursor:pointer}
+        .muted{color:#475569;font-size:14px}
+        .result{margin-top:12px;padding:14px;border-radius:12px;font-weight:700}
+        .result.safe{background:#e6fff2;color:#037a3a}
+        .result.warn{background:#fff7e6;color:#b35b00}
+        .result.danger{background:#ffeef0;color:#9a1f3b}
+        .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
+        .feature{padding:12px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfbfb);box-shadow:0 6px 18px rgba(12,18,28,0.04)}
+        .leaderboard{margin-top:20px}
+        table{width:100%;border-collapse:collapse}
+        td,th{padding:8px;text-align:left;border-bottom:1px solid rgba(10,10,10,0.04)}
+        footer{margin:48px 0 120px;color:#334155}
+        @media (max-width:880px){
+            .hero{grid-template-columns:1fr;}
+            .coconut-svg{display:none}
+            header{justify-content:space-between}
+        }
+        /* Coconuts (falling SVG) */
+        .falling-coconut{
+            position:absolute;
+            width:40px;height:40px;
+            left:0;top:0;pointer-events:none;
+            z-index:0;
+            opacity:0.92;
+            transition:transform 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="viewport" aria-hidden="true">
+        <div class="layer bg" data-speed="0.12" style="top:-8%;"></div>
+        <div class="layer clouds" data-speed="0.28"></div>
+        <div class="layer midtrees" data-speed="0.45"></div>
+        <div class="layer frtrees" data-speed="0.7"></div>
+        <div class="coconut-tree"></div>
+        <div class="layer coconuts" data-speed="0.8"></div>
+        <div class="layer treeline"></div>
+    </div>
+    <svg class="coconut-svg" viewBox="0 0 200 200">
+        <defs>
+            <linearGradient id="g" x1="0" x2="1">
+                <stop offset="0" stop-color="#ffdf7a" />
+                <stop offset="1" stop-color="#ffb199" />
+            </linearGradient>
+        </defs>
+        <g transform="rotate(-18 100 100)">
+            <ellipse cx="74" cy="110" rx="34" ry="52" fill="#1D2E28" />
+            <ellipse cx="82" cy="100" rx="18" ry="12" fill="#1D2E28" opacity="0.6" />
+            <circle cx="110" cy="80" r="40" fill="url(#g)" opacity="0.95" />
+        </g>
+    </svg>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="mark">TM</div>
+                <div>
+                    <div style="font-weight:800;letter-spacing:0.6px">തേങ്ങേടെ MOOD</div>
+                    <div class="muted">ThengaMood — The most uselessly delightful coconut mood detector</div>
+                </div>
+            </div>
+            <div style="margin-left:auto" class="muted">Hackathon: Useless Projects • Winner? Maybe</div>
+        </header>
+        <main>
+            <section class="hero">
+                <div>
+                    <div class="card">
+                        <h1>Will the Thenga fall? — Find out with "wind + color + vibes"</h1>
+                        <p class="subtitle">Point your camera at a coconut (തെങ്ങ്) and let Kerala Feng Shui inform your parking decision. Our logic is as scientific as a neighbour's intuition.</p>
+                        <div style="margin-top:14px" class="uploader">
+                            <div class="card file">
+                                <input id="imgIn" type="file" accept="image/*">
+                                <div style="flex:1">
+                                    <div class="muted">Upload a photo of the coconut (or tree). We'll pretend to analyze it.</div>
+                                </div>
+                            </div>
+                            <div class="card controls">
+                                <label class="muted">Wind (how breezy is it?)</label>
+                                <input id="wind" type="range" min="0" max="10" value="2">
+                                <div id="windVal" style="min-width:36px;text-align:center">2</div>
+                            </div>
+                            <div style="display:flex;gap:8px">
+                                <button id="analyze">Analyze Mood</button>
+                                <button id="adopt">Adopt a Coconut</button>
+                                <button id="leaderbtn" style="background:#2dd4bf">Leaderboard</button>
+                            </div>
+                            <div id="result" class="result safe">🟢 Safe to Park – Thenga not ready yet</div>
+                            <div class="muted">Tip: Our app is as reliable as KSEB's power-cut promises. Please also use your own gut feeling.</div>
+                        </div>
+                        <div class="features" style="margin-top:16px">
+                            <div class="feature"><strong>Color sensing</strong><div class="muted">We check if the coconut looks suspiciously green or ominously brown.</div></div>
+                            <div class="feature"><strong>Wind meter</strong><div class="muted">A big breeze increases the 'falling' vibe.</div></div>
+                            <div class="feature"><strong>Malayali Logic</strong><div class="muted">"തെങ്ങ് ചതിക്കില്ല" — occasionally overrides everything.</div></div>
+                            <div class="feature"><strong>Adopt & Talk</strong><div class="muted">Adopt a coconut pet and give it terrible dad jokes.</div></div>
+                        </div>
+                    </div>
+                    <div class="card leaderboard" style="margin-top:14px">
+                        <h3 style="margin:0">Leaderboard — Coconut Hunters</h3>
+                        <div class="muted">Upload the most different coconut trees to win meaningless glory.</div>
+                        <div class="leaderboard" id="board">
+                            <table>
+                                <thead><tr><th>Rank</th><th>Name</th><th>Uploads</th></tr></thead>
+                                <tbody id="boardBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <aside>
+                    <div class="card" style="position:sticky;top:28px">
+                        <h3 style="margin-top:0">App Mock — Live Preview</h3>
+                        <div style="height:14px"></div>
+                        <div style="background:#fff;padding:12px;border-radius:12px">
+                            <div style="display:flex;gap:12px;align-items:center">
+                                <div style="width:72px;height:72px;border-radius:12px;background:linear-gradient(180deg,#fef3c7,#ffecd1);display:grid;place-items:center;font-weight:800">TM</div>
+                                <div>
+                                    <div style="font-weight:700">Thenga ID: #42069</div>
+                                    <div class="muted">Location: Somewhere in Kerala</div>
+                                </div>
+                            </div>
+                            <div style="margin-top:12px">
+                                <div class="muted">Last analysis:</div>
+                                <div id="miniResult" class="result safe" style="margin-top:8px">🟢 Safe to Park</div>
+                            </div>
+                            <div style="margin-top:12px;display:flex;gap:8px">
+                                <button id="share">Share</button>
+                                <button id="pet" style="background:#60a5fa">Talk to my Thenga</button>
+                            </div>
+                        </div>
+                        <div style="height:18px"></div>
+                        <div class="card">
+                            <h4 style="margin:0">Why it's useless (and brilliant)</h4>
+                            <ul style="margin-top:8px">
+                                <li>Solves an age‑old problem most people ignore.</li>
+                                <li>Pure entertainment value + community gamification.</li>
+                                <li>Because someone once parked under a coconut and survived.</li>
+                            </ul>
+                        </div>
+ 			<div class = "card mydiv">
+				<p><t>      <b>തേങ്ങ</b></t> STORIES       </p>
+                                <p> 🌴Local Thenga Breaks World Record for Longest Coconut Swing!</P1>
+ <p>🌴Coconut Pet Adoption Hits All-Time High — Meet Your New Shell-Shocked Friend! </p>
+ <p> 🌴Meet the ‘Thenga Whisperer’ — Man Who Talks to Coconuts and Swears They Talk Back</p>
+ <p>🌴How to Decode Your Coconut’s Mood Using Kerala Feng Shui</p>
+			</div>
+                    </div>
+                </aside>
+            </section>
+            <section class="card" style="margin-top:26px">
+                <h3 style="margin:0">How it 'works' (very technical)</h3>
+                <p class="muted" style="margin-top:6px">We combine a totally reliable heuristic:</p>
+                <ol>
+                    <li>Extract average hue of the coconut area — greenish = young, brownish = mature.</li>
+                    <li>Read the wind slider (real app would read live weather).</li>
+                    <li>Combine with a random factor called "Malayali Intuition" and produce a verdict.</li>
+                </ol>
+                <p class="muted">This page is a playful prototype for your hackathon — tweak, prank, and present with confidence.</p>
+            </section>
+            <footer>
+                <div class="muted">© ThengaMood 2025 — Not responsible for coconut-related injuries. Made for a useless projects hackathon. Have fun and be safe.</div>
+            </footer>
+        </main>
+    </div>
+    <template id="coconutSVG">
+        <svg viewBox="0 0 40 40">
+            <ellipse cx="20" cy="31" rx="13" ry="8" fill="#6d3f2b" />
+            <ellipse cx="24" cy="26" rx="7" ry="4" fill="#84532c" opacity="0.8"/>
+            <circle cx="19" cy="19" r="13" fill="#9d652a" />
+            <ellipse cx="16" cy="10" rx="5" ry="3" fill="#e6b97a" opacity="0.82"/>
+        </svg>
+    </template>
+    
+    <script>
+        // Parallax engine
+        const layers = document.querySelectorAll('.layer');
+        function updateParallax(){
+            const top = window.scrollY || window.pageYOffset;
+            layers.forEach(layer =>{
+                const speed = parseFloat(layer.dataset.speed || 0.2);
+                layer.style.transform = `translate3d(-50%, ${-top * speed}px, 0)`;
+            });
+            requestAnimationFrame(updateParallax);
+        }
+        requestAnimationFrame(updateParallax);
+
+        // UI Logic: fake 'analysis'
+        const wind = document.getElementById('wind');
+        const windVal = document.getElementById('windVal');
+        const analyze = document.getElementById('analyze');
+        const result = document.getElementById('result');
+        const miniRes = document.getElementById('miniResult');
+        const imgIn = document.getElementById('imgIn');
+        wind.addEventListener('input', ()=> windVal.textContent = wind.value );
+        function pickVerdict(score){
+            if(score <= 3) return {cls:'safe', text:'🟢 Safe to Park – Thenga not ready yet'};
+            if(score <= 6) return {cls:'warn', text:'🟠 Caution – Might wobble soon. Park at your own risk.'};
+            return {cls:'danger', text:'🔴 Danger – Highly moody coconut. Move your car NOW.'};
+        }
+        analyze.addEventListener('click', ()=>{
+            const w = Number(wind.value);
+            let colorFactor = 3;
+            if(imgIn.files && imgIn.files[0]){
+                const n = imgIn.files[0].name.toLowerCase();
+                if(n.includes('green')||n.includes('greenish')||n.includes('leaf')) colorFactor = 2;
+                if(n.includes('brown')||n.includes('mature')) colorFactor = 7;
+            }
+            const malayaliIntuition = Math.random()*3 - 0.5;
+            const score = Math.round(w + colorFactor + malayaliIntuition);
+            const v = pickVerdict(score);
+            result.className = 'result '+v.cls;
+            result.textContent = v.text;
+            miniRes.className = 'result '+v.cls;
+            miniRes.textContent = v.text;
+            const user = prompt('Give a name to record your upload on the leaderboard (or Cancel):');
+            if(user){
+                addToBoard(user);
+            }
+        });
+        // Leaderboard (localStorage)
+        function getBoard(){
+            try{ return JSON.parse(localStorage.getItem('thenga_board')||'{}'); }catch(e){return{}};
+        }
+        function saveBoard(b){ localStorage.setItem('thenga_board',JSON.stringify(b)); }
+        function addToBoard(name){
+            const b = getBoard();
+            b[name] = (b[name]||0)+1;
+            saveBoard(b);
+            renderBoard();
+        }
+        function renderBoard(){
+            const b = getBoard();
+            const arr = Object.entries(b).map(([name,c])=>({name,c})).sort((a,b)=>b.c - a.c);
+            const tbody = document.getElementById('boardBody');
+            tbody.innerHTML = '';
+            if(arr.length===0){ tbody.innerHTML = '<tr><td colspan="3" class="muted">No uploads yet — be the first!</td></tr>'; return }
+            arr.forEach((r,i)=>{
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>#${i+1}</td><td>${escapeHtml(r.name)}</td><td>${r.c}</td>`;
+                tbody.appendChild(tr);
+            });
+        }
+        function escapeHtml(s){ return String(s).replace(/[&<>\"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"})[c]); }
+        renderBoard();
+        // adopt modal
+        document.getElementById('adopt').addEventListener('click', ()=>{
+            const name = prompt('Your new coconut pet needs a name! What will you call it?');
+            if(name){
+                alert(`You adopted "${name}"! It seems excited. (It cannot actually move, but it listens.)`);
+                localStorage.setItem('thenga_pet', name);
+            }
+        });
+        document.getElementById('leaderbtn').addEventListener('click', ()=>{
+            window.scrollTo({top:document.querySelector('.leaderboard').offsetTop - 20, behavior:'smooth'});
+        });
+        document.getElementById('pet').addEventListener('click', ()=>{
+            const pet = localStorage.getItem('thenga_pet');
+            if(!pet) return alert('No pet found — adopt one first!');
+            const jokes = ['Why did the coconut go to school? To get a little "nut"rition!','Thenga says: I am shell-shocked!','I am a little husky today — shell you pet me?'];
+            alert(`${pet} says: "${jokes[Math.floor(Math.random()*jokes.length)]}"`);
+        });
+        document.getElementById('share').addEventListener('click', ()=>{
+            alert('Pretend share dialog opened. Share to WhatsApp, FB, or shout from the local tea shop.');
+        });
+        imgIn.addEventListener('keydown', (e)=>{ if(e.key==='Enter') analyze.click(); });
+
+        // --- Coconut background animation ---
+        const coconutLayer = document.querySelector('.layer.coconuts');
+        const coconutTemplate = document.getElementById('coconutSVG');
+        const coconutElts = [];
+        
+        function randomX(){ return Math.random()*window.innerWidth*0.95; }
+        function randomY(){ return Math.random()*window.innerHeight*0.6; }
+        
+        function makeCoconut(i){
+            const div = document.createElement('div');
+            div.className = 'falling-coconut';
+            div.style.left = randomX()+'px';
+            div.style.top = (-60 - Math.random()*100)+'px';
+            div.innerHTML = coconutTemplate.innerHTML;
+            coconutLayer.appendChild(div);
+            coconutElts.push({elt: div, offset: Math.random()*360, speed: 0.04+Math.random()*0.014, wave: 16+Math.random()*18, startX: randomX()});
+        }
+        
+        for(let i=0; i<12; ++i) makeCoconut(i);
+        
+        function animateCoconuts(){
+            const time = performance.now()/900;
+            coconutElts.forEach((c, i)=>{
+                let y = ((time*c.speed + c.offset)%1.2)*window.innerHeight*1.1;
+                let x = c.startX + Math.sin(time+c.offset)*c.wave;
+                c.elt.style.transform = `translate3d(${x-c.startX}px, ${y}px, 0) rotate(${(Math.sin(time*1.3+c.offset)*24)}deg)`;
+                
+                if(y>window.innerHeight+50){
+                    c.elt.style.left = randomX()+'px';
+                    c.elt.style.top = (-60)+'px';
+                    c.offset = Math.random()*360;
+                    c.startX = randomX(); // Reset horizontal start position
+                }
+            });
+            requestAnimationFrame(animateCoconuts);
+        }
+        animateCoconuts();
+        
+        window.addEventListener('resize', ()=>{
+            coconutElts.forEach((c,i)=>{
+                c.startX = randomX();
+                c.elt.style.left = c.startX + 'px';
+            });
+        });
+    </script>
+    
+    <script>
+        $(document).ready(function() {
+            function swayTree() {
+                $(".coconut-tree").animate(
+                    { deg: -5 },
+                    {
+                        duration: 2000,
+                        step: function(now) {
+                            $(this).css({
+                                transform: 'rotate(' + now + 'deg)'
+                            });
+                        },
+                        complete: function() {
+                            $(this).animate(
+                                { deg: 5 },
+                                {
+                                    duration: 2000,
+                                    step: function(now) {
+                                        $(this).css({
+                                            transform: 'rotate(' + now + 'deg)'
+                                        });
+                                    },
+                                    complete: function() {
+                                        swayTree();
+                                    }
+                                }
+                            );
+                        }
+                    }
+                );
+            }
+            swayTree();
+        });
+    </script>
+</body>
+</html>

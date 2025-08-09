@@ -1,96 +1,69 @@
 <img width="3188" height="1202" alt="frame (3)" src="https://github.com/user-attachments/assets/517ad8e9-ad22-457d-9538-a9e62d137cd7" />
 
 
-# [Project Name] 🎯
+# [തേങ്ങേടെ MOOD] 🎯
 
 
-## Basic Details
-### Team Name: [Name]
+## Introducing..............   "തേങ്ങേടെ MOOD"
+Yepppp U heard it rightt,bro we are talking about mood of a coconut(Whatttt??)
+So whats the deal?Welll most of the malayalis eppolenkilum once in their life must have risked their life parking under a coconut tree
+All we have to do is take a pic of the തെങ്ങ്(with thegha)and.....
+Our app detects whether a coconut is in a falling mood or not using:
+"wind + color + vibes" (aka Kerala Feng Shui)
+*colour
+*wind
+*Pure malayali logic like "തെങ്ങ് ചതിക്കില്ല" (Le Thenga: BRO WHO SAID??)and a lot....moreee
+And give u the RIGHT(please listen to ur gut feeeling too) replies:
+🟢 Safe to Park – Thenga not ready yet
+No tension, mone! U can… chill your Dzire. 😎
+And Our app is as reliable as KSEB's power-cut promises(NO offense)
+### Team Name: [Dopes]
 
 
 ### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Team Lead: [Bhoomika K B] - [Vidya Academy of Science and Technology,Thalakottukara]
+- Member 2: [Gowribhadra krishnakumar] - [Vidya Academy of Science and Technology,Thalakottukara]
+
 
 ### Project Description
-[2-3 lines about what your project does]
+[All we thought about was enetering to the coconut universe and then ...........]
 
 ### The Problem (that doesn't exist)
-[What ridiculous problem are you solving?]
+[WWe beliee that we have a god,but what if we are the god in this universe(തേങ്ങേടെ MOOD) we are the saviors]
 
 ### The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+[Help thoose poor babies and let them be happy brooo,everyone deserves to be happy(yeah we are talking abt the mental health of thegha)]
 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
+- [html,css,js]
 - [Tools used]
 
-For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
 
-### Implementation
-For Software:
-# Installation
-[commands]
-
-# Run
-[commands]
 
 ### Project Documentation
 For Software:
+So think like u r entering thegha universe,
+and what happens
+yeahhhhh we get to know that most of them are sad.....happy,depressed and angry
+Whatttttttttt yeahhhh u r in their universe brooooo
+so who are u then 
+U r the god
+The ultimate savior of these poor babies
+Enjoy ur ride
 
 # Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+<img width="1920" height="1080" alt="Screenshot 2025-08-09 151719" src="https://github.com/user-attachments/assets/9b0e6516-d54a-44ad-a326-c6792b9aace1" />
+<img width="1920" height="1080" alt="Screenshot 2025-08-09 151730" src="https://github.com/user-attachments/assets/0d4b6907-0b54-4f90-8d8f-29c3485c60cc" />
+<img width="1920" height="1080" alt="Screenshot 2025-08-09 151750" src="https://github.com/user-attachments/assets/468e99a1-ad1a-4a2a-9223-d2983df117a6" />
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
-
-# Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-*Add caption explaining your workflow*
-
-For Hardware:
-
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
-# Build Photos
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
-
-### Project Demo
-# Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
-
-# Additional Demos
-[Add any extra demo materials/links]
 
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
+- [Bhoomika K B]: [css,js]
+- [Gowribhadra krishnakumar]: [html,UI/UX]
+
 
 ---
 Made with ❤️ at TinkerHub Useless Projects 
